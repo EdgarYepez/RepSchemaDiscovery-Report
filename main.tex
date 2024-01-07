@@ -1,0 +1,50 @@
+\documentclass[sigconf, nonacm]{acmart}
+\newcommand\vldbauthors{\authors}
+\newcommand\vldbtitle{\shorttitle} 
+\newcommand\vldbavailabilityurl{https://github.com/EdgarYepez/RepSchemaDiscovery}
+% whether page numbers should be shown or not, use 'plain' for review versions, 'empty' for camera ready
+\newcommand\vldbpagestyle{plain} 
+
+\begin{document}
+
+\title{Experiment Reproduction: JSON Schema Discovery}
+
+\author{Edgar Yepez}
+\affiliation{
+  \institution{Universität Passau}
+  \city{Passau}
+  \state{Germany}
+}
+\email{yepezl01@ads.uni-passau.de}
+
+\maketitle
+
+\ifdefempty{\vldbavailabilityurl}{}{
+\vspace{.3cm}
+\begingroup\small\noindent\raggedright\textbf{Artifact Availability:}\\
+The source code, data, and/or other artifacts have been made available at \url{https://github.com/EdgarYepez/RepSchemaDiscovery}.
+\endgroup
+}
+
+\section{Introduction}
+
+The current work introduces a setting for reproduction of an experiment from the paper ``An Approach for Schema Extraction of JSON and Extended JSON Document
+Collections'' by Frozza A. et al~\cite{angelo2018}.
+
+In their work, the authors presented an approach to perform schema discovery over a collection of JSON documents. A JSON document is regarded as a document that complies with the JSON format for representing structured data. By that token, the JSON format defines a text syntax capable of representing a hierarchy of named values of either basic or composite data types. Basic data types include strings, numbers and booleans, whereas composite data types include arrays and objects~\cite{mdn2024}. An important characteristic of the JSON format is that it does not enforce a specific structure over the names and data types of the values that form a document. This fact is denoted as schemaless, and allows for the storage of data without prior knowledge of its structure~\cite{angelo2018}. Therefore, the schema discovery task corresponds to determining and describing the underlying structure of some JSON document.
+
+In this regard, the authors of the aforementioned paper introduced a method to extract the schema form a collection of JSON documents by a four-step process. It starts by traversing the document collection and analyses the named values of each document in order to identify its individual schema, referred to as a raw schema. Next, after a sorting and organisation stage, it combines the identified raw schemas into a single schema that would represent the entire document collection. To that end, a tree data structure is employed, which aids in the summarisation of raw schemas by recording information on objects, arrays and other data types.
+
+In order to assess the performance of the proposed method, the authors conducted three experiments focusing on different evaluation criteria. The first experiment focused on the quality of the mappings from JSON documents to JSON schemas, by determining an accuracy rate for both completeness and correctness. Next, an experiment was conducted to measure the processing time of the combined four steps of the proposed method. In this experiment, the final measurement assessment corresponds to the proportional relationship between the time for raw schema extraction over the total ruining time of the process. Finally, the third experiment focused on comparing the quality of the generated JSON schemas against related methods proposed by previous research works. No comparison was performed, however, against running time of the related works.
+
+\section{Setting}
+
+The current work aims at reproducing the first performance experiment from the aforementioned ones. Specifically, it is of interest to determine the accuracy for correctness and completeness of the mappings from JSON documents to JSON schemas. In their original experiment, the authors employed a set of five JSON documents to assess the relevant criteria and thus determine the accuracy rate. For this purpose, the resulting JSON schemas were compared against a ground-truth associated to the input JSON documents, yet no mention on the process to obtain said ground-truth was made. Nonetheless, the authors claim to have accomplished an accuracy rate of 100\% across all expected data types in the input JSON documents. In this sense, the hypothesis to verify in the current work is that the accuracy rate of the mappings from JSON documents to JSON schemas is 100\% across all expected data types in some input JSON documents.
+
+To check for the hypothesis, one of the datasets used by the authors in their second and third experiments is used. It consists of a collection of JSON documents about check-ins and venues in the city of Florence~\cite{emre2017}. Its metadata is packed with information on the schema of the JSON documents, which therefore provides a ground-truth against which the extracted JSON schema can be compared. To this end, a JSON comparison tool is employed. Finally, the criteria for a successful hypothesis confirmation corresponds to the output of the tool stating equality between the ground-truth JSON schema and the extracted JSON schema.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}
+\endinput
